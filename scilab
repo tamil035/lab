@@ -1,0 +1,228 @@
+1.	Perform the basic operations on a matrix ( Identity, Transpose, Zeros, Ones and Random matrices)
+
+
+identify_matrix=eye(3,3);
+zeros_matrix=zeros(3,3);
+ones_matrix=ones(3,3);
+random_matrix=rand(3,3);
+a=[1,2,3;4,5,6;7,8,9];
+transpose_matrix=a;
+disp(identify_matrix);
+disp(zeros_matrix);
+disp(ones_matrix);
+disp(transpose_matrix);
+disp(random_matrix);
+
+
+
+Output : 
+
+
+   1.   0.   0.
+   0.   1.   0.
+   0.   0.   1.
+
+   0.   0.   0.
+   0.   0.   0.
+   0.   0.   0.
+
+   1.   1.   1.
+   1.   1.   1.
+   1.   1.   1.
+
+   1.   2.   3.
+   4.   5.   6.
+   7.   8.   9.
+
+   0.2113249   0.3303271   0.8497452
+   0.7560439   0.6653811   0.685731 
+   0.0002211   0.6283918   0.8782165
+
+
+
+2.	Perform the fundamental operations on an image ( Read, write, negative of an image )
+
+image=imread("C:\Users\student\Documents\image lab\images.jpeg.jpg");
+imwrite(image,"output_image.jpg");
+Negative_image=255-image;
+figure();
+imshow(image);
+xtitle("original_Image");
+figure();
+imshow(Negative_image);
+xtitle("Negative Image");
+imwrite(Negative_image,"Negative_image.jpg");
+
+
+Output : 
+  
+3.Implement a ) Relationships between pixels in an image  b) Transformations of an image
+
+image=imread("C:\Users\student\Documents\image lab\images.jpeg (2).jpg");
+pixel_relationship=image(1:2:$,1:2:$);
+figure();
+imshow(pixel_relationship);
+transformed_image=imrotate(image,45);
+figure();
+imshow(transformed_image);
+
+
+Output : 
+ 
+
+ 
+4.Perform contrast stretching of a low contrast image, Histogram and Histogram Equalization of an image
+
+image=imread("C:\Users\student\Documents\image lab\images.jpeg (2).jpg");
+gray=rgb2gray(image);
+figure();
+imshow(gray);
+pixels=matrix(double(gray),-1,1);
+figure();
+histplot(256,pixels);
+x.title("histogram")
+
+Output :  
+
+
+
+ 
+5. Display of bit planes and FFT ( 1-D & 2-D ) of an image
+
+image=imread("C:\Users\student\Documents\image lab\images.jpeg.jpg");
+gray=rgb2gray(image);
+for i=1:8
+    figure();
+imshow(bitget(gray,i)*255);
+end
+fft_1d=fft(double(gray));
+fft_2d=fft2(double(gray));
+
+Output : 
+
+   
+6. Compare the Discrete Fourier Transform and Discrete Cosine Transforms of an image
+img=imread("C:\Users\student\Documents\image lab\download.jpg");
+g=rgb2gray(img);
+figure();imshow(g);xtitle("Gray");
+figure();
+d=log(1+abs(fftshift(fft2(double(g)))));
+imshow(uint8(255*d/max(d)));
+xtitle("DFT");
+figure();
+c=log(1+abs(dct(double(g))));
+imshow(uint8(255*c/max(c)));
+xtitle("DCT");
+disp("completed");
+Output : 
+   
+7. Compare the mean, standard deviation, correlation coefficient of the given image
+
+image1=imread("C:\Users\student\Documents\image lab\images.jpeg");
+image2=imread("C:\Users\student\Documents\image lab\images.jpeg");
+gray1=rgb2gray(image1);
+gray2=rgb2gray(image2);
+mean_value=mean(double(gray1));
+disp(mean_value);
+std_deviation=stdev(double(gray1));
+disp(std_deviation);
+x=matrix(double(gray1),-1,1);
+y=matrix(double(gray2),-1,1);
+correlation_coefficient=sum((x-mean(x)).*(y-mean(y)))/sqrt(sum((x-mean(x)).^2)*sum((y-mean(y)).^2));
+disp(correlation_coefficient);
+
+
+
+Output : 
+
+190.09989 - mean
+
+87.871057 – standard deviation
+
+1 – correlation coefficient
+
+
+
+
+
+
+
+
+
+
+
+
+
+8. Implement the image smoothening filters ( Mean and Median filtering of an Image  )
+
+img=imread("C:\Users\student\Documents\image lab\images.jpeg.jpg");
+g=rgb2gray(img);
+mean_filter=imfilter(g,ones(3,3)/9);
+figure();
+imshow(mean_filter);
+xtitle("mean.filter");
+median_image=immedian(g,3);
+figure();
+imshow(median_image);
+xtitle("median filter");
+
+
+Output : 
+ 
+
+ 
+
+9. Implement the image sharpening filters
+
+
+image=imread("C:\Users\student\Documents\image lab\images.jpeg (2).jpg");
+g=rgb2gray(image);
+figure();
+imshow(g);
+f=[0 -1 0;-1 5 -1; 0 -1 0];
+sharp=imfilter(g,f);
+figure();
+imshow(sharp);
+
+Output : 
+
+ 
+
+
+ 
+10. Implementation of image restoring techniques
+
+a = imread("C:\Users\student\Documents\image lab\images.jpeg3");
+n = imnoise(a,"salt & pepper",0.02);
+r = imfilter(n,ones(3,3)/9);
+subplot(1,3,1);
+imshow(a);
+title("Original");
+subplot(1,3,2);
+imshow(n);
+title("Noisy");
+subplot(1,3,3);
+imshow(r);
+title("Restored");
+
+
+Output : 
+
+ 
+
+11. Implementation of image intensity slicing technique for image enhancement
+
+a = imread("C:\Users\student\Documents\image lab\images.jpeg3");
+g = rgb2gray(a);
+b = g;
+b(g > 100 & g < 200) = 255;
+imshow(g);
+title("Original Image");
+scf();
+imshow(b);
+title("Intensity Sliced Image");
+
+Output : 
+ 
+ 
+
